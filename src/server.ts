@@ -4,7 +4,6 @@ import cors from "cors";
 import authRoutes from "./routes/auth";
 import todoRoutes from "./routes/todo";
 import errorHandler from "./middleware/errorHandler";
-import { logErrorToDb } from "./utils/logger";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -31,6 +30,4 @@ mongoose
   })
   .catch((err) => {
     console.error("MongoDB connection error:", err);
-    // if connection fails, try to log locally
-    logErrorToDb({ message: "Mongo connection failed", stack: err.stack || "" }).catch(console.error);
   });

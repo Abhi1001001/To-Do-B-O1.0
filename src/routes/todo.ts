@@ -20,7 +20,11 @@ router.get("/", async (req, res, next) => {
   try {
     const todos = await Todo.find({ user: req.userId }).sort({ createdAt: -1 });
     res.json(todos);
-  } catch (err) { next(err); }
+  } catch (err) { 
+    next(err);
+    console.log(err);    
+    return res.status(500).json({ message: "Internal server error" });
+   }
 });
 
 // update
